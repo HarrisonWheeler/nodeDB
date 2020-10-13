@@ -11,14 +11,17 @@ export class TaskController extends BaseController {
   }
   async getAll(req, res, next) {
     try {
-      return res.send(["value1", "value2"]);
+      let tasks = await tasksService.getAll()
+      res.send({ data: tasks, message: "Got the tasks!" })
     } catch (err) {
       next(err);
     }
   }
   async create(req, res, next) {
     try {
-      res.send(req.body);
+      let rawTaskData = req.body
+      let tasks = await tasksService.create(rawTaskData)
+      res.send({ data: tasks, message: "Created a Task!" })
     } catch (err) {
       next(err);
     }
