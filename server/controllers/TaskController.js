@@ -12,15 +12,15 @@ export class TaskController extends BaseController {
   async getAll(req, res, next) {
     try {
       return res.send(["value1", "value2"]);
-    } catch (error) {
-      next(error);
+    } catch (err) {
+      next(err);
     }
   }
   async create(req, res, next) {
     try {
       res.send(req.body);
-    } catch (error) {
-      next(error);
+    } catch (err) {
+      next(err);
     }
   }
 }
