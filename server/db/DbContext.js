@@ -1,8 +1,8 @@
-import ValueSchema from "../models/Value";
+import ValueSchema from "../models/Tasks";
 import mongoose from "mongoose";
 
 class DbContext {
-  Values = mongoose.model("Value", ValueSchema);
+  Tasks = mongoose.model("Task", ValueSchema);
 }
 
 export const dbContext = new DbContext();

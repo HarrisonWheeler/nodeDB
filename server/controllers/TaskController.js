@@ -1,15 +1,15 @@
 import express from "express";
 import BaseController from "../utils/BaseController";
-import { valuesService } from "../services/ValueService";
+import { tasksService } from "../services/TasksService";
 
-export class ValuesController extends BaseController {
+export class TaskController extends BaseController {
   constructor() {
-    super("api/values");
+    super("api/tasks");
     this.router
       .get("", this.getAll)
       .post("", this.create);
   }
-  async getAll(_, res, next) {
+  async getAll(req, res, next) {
     try {
       return res.send(["value1", "value2"]);
     } catch (error) {
