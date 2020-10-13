@@ -6,7 +6,6 @@ class TasksService {
     let tasks = await dbContext.Tasks.find();
     return tasks;
   }
-
   async create(rawTaskData) {
     let tasks = await dbContext.Tasks.create(rawTaskData)
   }
@@ -16,6 +15,12 @@ class TasksService {
       throw new BadRequest("Invalid Id");
     }
     return task;
+  }
+  async edit(taskId, editedTaskData) {
+    let editedTask = await dbContext.Tasks.findByIdAndUpdate(taskId, editedTaskData, { new: true })
+    if (!editedTask) {
+      throw new BadRequest("Unable to edit Task");
+    }
   }
 }
 

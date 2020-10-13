@@ -8,7 +8,8 @@ export class TaskController extends BaseController {
     this.router
       .get("", this.getAll)
       .get("/:id", this.getById)
-      .post("", this.create);
+      .post("", this.create)
+      .put("/:id", this.edit)
   }
   async getAll(req, res, next) {
     try {
@@ -30,9 +31,19 @@ export class TaskController extends BaseController {
     try {
       let rawTaskData = req.body
       let tasks = await tasksService.create(rawTaskData)
-      res.send({ data: tasks, message: "Created a Task!" })
+      res.send({ data: tasks, message: "Created a task!" })
     } catch (err) {
       next(err);
+    }
+  }
+
+  async edit(req, res, next) {
+    try {
+      let editedTaskData = req.body
+      let tasks = await tasksService.edit(req.params.id, editedTaskData)
+      res.send({ data: tasks, message: "Edited your task!" })
+    } catch (err) {
+      next(err)
     }
   }
 }
