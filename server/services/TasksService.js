@@ -10,12 +10,12 @@ class TasksService {
   async create(rawTaskData) {
     let tasks = await dbContext.Tasks.create(rawTaskData)
   }
-  async findById(id) {
-    let value = await dbContext.Tasks.findById(id);
-    if (!value) {
+  async getTasksById(id) {
+    let task = await dbContext.Tasks.findById(id);
+    if (!task) {
       throw new BadRequest("Invalid Id");
     }
-    return value;
+    return task;
   }
 }
 

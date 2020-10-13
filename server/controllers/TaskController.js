@@ -7,6 +7,7 @@ export class TaskController extends BaseController {
     super("api/tasks");
     this.router
       .get("", this.getAll)
+      .get("/:id", this.getById)
       .post("", this.create);
   }
   async getAll(req, res, next) {
@@ -15,6 +16,14 @@ export class TaskController extends BaseController {
       res.send({ data: tasks, message: "Got the tasks!" })
     } catch (err) {
       next(err);
+    }
+  }
+  async getById(req, res, next) {
+    try {
+      let tasks = await tasksService.getTasksById(req.params.id)
+      res.send({ data: tasks, message: "Got the specific task!" })
+    } catch (err) {
+      next(err)
     }
   }
   async create(req, res, next) {
